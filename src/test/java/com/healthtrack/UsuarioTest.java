@@ -15,20 +15,20 @@ public class UsuarioTest {
     public void testActualizarPeso() {
         Usuario usuario = new Usuario("Ana", 70.0);
         usuario.actualizarPeso(72.5);
-        assertEquals(72.5, usuario.getPeso(), 0.01, "El peso no se actualiz\u00f3 correctamente.");
+        assertEquals(72.5, usuario.getPeso(), 0.01, "El peso no se actualizo correctamente.");
     }
 
     @Test
     public void testActualizarPesoConValorCero() {
         Usuario usuario = new Usuario("Carlos", 65.0);
         usuario.actualizarPeso(0.0);
-        assertEquals(0.0, usuario.getPeso(), 0.01, "El peso no se actualiz\u00f3 correctamente a cero.");
+        assertEquals(0.0, usuario.getPeso(), 0.01, "El peso no se actualizo correctamente a cero.");
     }
 
     @Test
     public void testActualizarPesoConValorNegativo() {
         Usuario usuario = new Usuario("María", 55.0);
         usuario.actualizarPeso(-3.5);
-        assertEquals(-3.5, usuario.getPeso(), 0.01, "El peso negativo no se actualiz\u00f3 correctamente.");
+        assertEquals(-3.5, usuario.getPeso(), 0.01, "El peso negativo no se actualizo correctamente.");
     }
 }
