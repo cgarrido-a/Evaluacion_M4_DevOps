@@ -42,7 +42,7 @@ jobs:
         mvn test
 
     - name: Upload JUnit test reports
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: junit-test-reports
         path: target/surefire-reports
