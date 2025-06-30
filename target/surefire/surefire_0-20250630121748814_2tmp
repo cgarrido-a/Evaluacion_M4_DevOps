@@ -1,4 +1,5 @@
 #surefire_0
-#Fri Jun 27 20:50:06 CLT 2025
+#Mon Jun 30 12:17:48 CLT 2025
 basedir=/home/consuelo/healthtrack
+test=PruebaFuncionalUsuarioTest
 localRepository=/home/consuelo/.m2/repository
