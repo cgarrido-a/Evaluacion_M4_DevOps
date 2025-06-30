@@ -19,7 +19,7 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: '17'
-        
+
     - name: Install Chrome and Chromedriver
       run: |
         sudo apt-get update
@@ -70,6 +70,17 @@ jobs:
         name: jmeter-html-report
         path: jmeter-report
 
-    - name: Notify on failure (example only)
+    - name: Send email on failure
       if: failure()
-      run: echo "El pipeline falló. Revisa los reportes en GitHub Actions."
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.example.com
+        server_port: 587
+        username: ${{ secrets.EMAIL_USERNAME }}
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        subject: "Build Failure - HealthTrack Tests"
+        body: "El pipeline de CI ha fallado. Por favor revisa los reportes de pruebas."
+        to: tu-correo@dominio.com
+        from: ${{ secrets.EMAIL_USERNAME }}
+        secure: true
+
