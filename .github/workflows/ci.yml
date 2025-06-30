@@ -52,11 +52,11 @@ jobs:
     - name: SonarQube Scan
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: mvn sonar:sonar \
-           -Dsonar.projectKey=cgarrido-a_Evaluacion_M4_DevOps \
-           -Dsonar.organization=cgarrido-a \
-           -Dsonar.host.url=https://sonarcloud.io \
-           -Dsonar.login=$SONAR_TOKEN
+      run: |
+        mvn sonar:sonar -Dsonar.projectKey=cgarrido-a_Evaluacion_M4_DevOps \
+                        -Dsonar.organization=cgarrido-a \
+                        -Dsonar.host.url=https://sonarcloud.io \
+                        -Dsonar.login=$SONAR_TOKEN
 
     - name: Upload JUnit test reports
       uses: actions/upload-artifact@v4
@@ -86,16 +86,17 @@ jobs:
         name: jmeter-html-report
         path: jmeter-report
 
-    - name: Send email on failure
+    - name: Send email on failure (prueba sin enviar)
       if: failure()
       uses: dawidd6/action-send-mail@v3
       with:
-        server_address: smtp.example.com  # Cambia por tu SMTP real
+        server_address: smtp.test.com
         server_port: 587
-        username: ${{ secrets.EMAIL_USERNAME }}
-        password: ${{ secrets.EMAIL_PASSWORD }}
-        subject: "Falló el pipeline CI - HealthTrack"
-        body: "El pipeline de integración continua falló. Por favor revisa los reportes adjuntos en GitHub Actions."
-        to: tu-correo@dominio.com
-        from: ${{ secrets.EMAIL_USERNAME }}
+        username: test@example.com
+        password: fakepassword
+        subject: "Prueba pipeline CI - No enviar mail"
+        body: "Esta es una prueba y no se enviará correo real."
+        to: test@nowhere.com
+        from: test@example.com
         secure: true
+
