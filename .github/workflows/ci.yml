@@ -23,7 +23,7 @@ jobs:
     - name: Install Chrome and Chromedriver
       run: |
         sudo apt-get update
-        sudo apt-get install -y wget unzip xvfb libxi6 libgconf-2-4 libnss3 libatk1.0-0 libatk-bridge2.0-0 libxss1 libgtk-3-0
+        sudo apt-get install -y wget unzip xvfb libxi6 libnss3 libatk1.0-0 libatk-bridge2.0-0 libxss1 libgtk-3-0
         wget https://storage.googleapis.com/chrome-for-testing-public/124.0.6367.91/linux64/chrome-linux64.zip
         unzip chrome-linux64.zip
         sudo mv chrome-linux64 /opt/google/chrome
