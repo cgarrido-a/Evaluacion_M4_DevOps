@@ -44,20 +44,25 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y wget unzip xvfb
+        # Instalar Google Chrome estable
         wget -N https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
         sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get -f install -y
 
-        # ChromeDriver compatible con Chrome 137
+        # Descargar ChromeDriver compatible con Chrome 137
         wget -N https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/137.0.7151.119/linux64/chromedriver-linux64.zip
         unzip -o chromedriver-linux64.zip
-        sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
+        # Mover y renombrar correctamente para que Selenium lo encuentre
+        sudo mv chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
         sudo chmod +x /usr/local/bin/chromedriver
+
+    - name: Check ChromeDriver installation
+      run: ls -l /usr/local/bin/chromedriver
 
     - name: Run unit and functional tests
       env:
         DISPLAY: :99
       run: |
-        Xvfb :99 &  # Selenium necesita servidor X virtual
+        Xvfb :99 &  # Selenium necesita un servidor X virtual para modo headless
         mvn test
 
     - name: Upload JUnit test reports
@@ -92,7 +97,7 @@ jobs:
       if: failure()
       uses: dawidd6/action-send-mail@v3
       with:
-        server_address: smtp.example.com  
+        server_address: smtp.example.com  # Cambia esto a tu servidor SMTP real
         server_port: 587
         username: ${{ secrets.EMAIL_USERNAME }}
         password: ${{ secrets.EMAIL_PASSWORD }}
