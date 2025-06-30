@@ -23,15 +23,10 @@ jobs:
     - name: Install Chrome and Chromedriver
       run: |
         sudo apt-get update
-        sudo apt-get install -y wget unzip xvfb libxi6 libnss3 libatk1.0-0 libatk-bridge2.0-0 libxss1 libgtk-3-0
-        wget https://storage.googleapis.com/chrome-for-testing-public/124.0.6367.91/linux64/chrome-linux64.zip
-        unzip chrome-linux64.zip
-        sudo mv chrome-linux64 /opt/google/chrome
-        sudo ln -s /opt/google/chrome/chrome /usr/bin/google-chrome
-
-        wget https://storage.googleapis.com/chrome-for-testing-public/124.0.6367.91/linux64/chromedriver-linux64.zip
-        unzip chromedriver-linux64.zip
-        sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
+        sudo apt-get install -y wget unzip xvfb google-chrome-stable
+        wget -N https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
+        unzip -o chromedriver_linux64.zip
+        sudo mv chromedriver /usr/local/bin/
         sudo chmod +x /usr/local/bin/chromedriver
 
     - name: Run unit and functional tests
